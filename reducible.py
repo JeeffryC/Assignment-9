@@ -64,9 +64,7 @@ def step_size(s):
     pre: s is a lowercase string.
     post: Returns the calculated step size as an integer based on the provided string.
     """
-    step_size_num = STEP_SIZE_CONSTANT - ((ord(s) - 96) % STEP_SIZE_CONSTANT)
-    if 
-    next_index = (hash_word(s, ) + step_size_num) % 
+    return STEP_SIZE_CONSTANT - hash_word(s, STEP_SIZE_CONSTANT)
 
 # TODO: Modify this function. You may delete this comment when you are done.
 def insert_word(s, hash_table):
@@ -78,7 +76,17 @@ def insert_word(s, hash_table):
     post: Inserts s into hash_table at the correct index; resolves any collisions
           by double hashing.
     """
+    if find_word(s, hash_table):
+        return
+    current_index = hash_word(s, len(hash_table))
 
+    if hash_table[current_index] == "":
+        hash_table[current_index] = s
+    else:
+        while hash_table[current_index] != "":
+            next_index = (current_index + step_size(s)) % len(hash_table)
+            current_index = next_index
+        hash_table[next_index] = s
 
 # TODO: Modify this function. You may delete this comment when you are done.
 def find_word(s, hash_table):
@@ -90,6 +98,7 @@ def find_word(s, hash_table):
     pre: s is a string, and hash_table is a list representing the hash table.
     post: Returns True if s is found in hash_table, otherwise returns False.
     """
+    
 
 
 # TODO: Modify this function. You may delete this comment when you are done.
@@ -158,6 +167,8 @@ def main():
 
     # print the reducible words in alphabetical order
     # one word per line
+    word_list = []
+    
 
 
 if __name__ == "__main__":
