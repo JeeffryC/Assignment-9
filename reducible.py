@@ -126,6 +126,18 @@ def get_longest_words(string_list):
     pre: string_list is a list of lowercase strings.
     post: Returns a list of words in string_list that have the maximum length.
     """
+    if string_list == []:
+        return []
+    longest_words = []
+    for _, word in enumerate(string_list):
+        if not longest_words:
+            longest_words.append(word)
+        elif len(word) > len(longest_words[0]):
+            longest_words = []
+            longest_words.append(word)
+        elif len(word) == len(longest_words[0]):
+            longest_words.append(word)
+    return longest_words
 
 
 # TODO: Modify this function. You may delete this comment when you are done.
