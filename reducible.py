@@ -116,6 +116,30 @@ def is_reducible(s, hash_table, hash_memo):
     post: Returns True if s is reducible (also updates hash_memo by
           inserting s if reducible), otherwise returns False.
     """
+    # if len(s) == 1, ck a, i, o  -> return True
+    if len(s) == 1:
+        if s in ["a", "i", "o"]:
+            insert_word(s, hash_table)
+            hash_memo.append(s)
+            # hash_memo[hash_word(s, len(hash_table))] = s
+            return True
+        return False
+
+    for char in range(len(s)):
+        str_reduce = s[:char] + s[char+1:]
+        if find_word(str_reduce, hash_table):
+            if is_reducible(str_reduce, hash_table, hash_memo):
+                insert_word(s, hash_table)
+                hash_memo.append(s)
+                # hash_memo[hash_word(s, len(hash_table))] = s
+                return True
+    return False
+
+
+
+    # check find(word), reduce
+    # use slicing to reduce word, slice & then append remaining word
+    # check has
 
 
 # TODO: Modify this function. You may delete this comment when you are done.
