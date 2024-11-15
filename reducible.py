@@ -114,12 +114,12 @@ def is_reducible(s, hash_table, hash_memo):
     """
     if "a" not in s and "i" not in s and "o" not in s:
         return False
+    if find_word(s, hash_memo):
+        return True
     if len(s) == 1:
         if s in ["a", "i", "o"]:
             return True
-
-    if find_word(s, hash_memo):
-        return True
+        return False
 
     for char in range(len(s)):
         str_reduce = s[:char] + s[char+1:]
